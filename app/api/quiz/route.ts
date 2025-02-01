@@ -33,22 +33,26 @@ export async function POST(req: NextRequest) {
   }
 
   // If not a submission, proceed with quiz generation
-  const { jobTitle, skills, jobDescription }: QuizFormData = body;
+  const { domain, difficulty, topic }: QuizFormData = body;
+  
   try {
-    console.log("Generating quiz for:", { jobTitle, skills, jobDescription });
-    const generatedQuestions: QuizQuestion[] = await generateQuiz(jobTitle, skills, jobDescription);
+    console.log("Generating quiz for:", { domain, difficulty, topic });
+    const generatedQuestions: QuizQuestion[] = await generateQuiz(domain, difficulty, topic);
     
     console.log("Generated questions:", generatedQuestions);
     const quiz = await prisma.quiz.create({
       data: {
-        title: jobTitle, // Use jobTitle as the quiz title
-        description: jobDescription, // Make sure jobDescription is not undefined
+        title: topic,
+        domain: domain,
+        topic: topic,
+        difficulty: difficulty,
         userId: userId,
         questions: {
           create: generatedQuestions.map((q) => ({
             question: q.question,
             options: q.options,
             correctAnswer: q.correctAnswer,
+            explanation: q.explanation || "No explanation provided",
           })),
         },
       },

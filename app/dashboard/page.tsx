@@ -17,8 +17,9 @@ interface QuizAttempt {
 interface Quiz {
   id: string;
   title: string;
-  description: string;
-  jobTitle: string; // Add jobTitle to the Quiz interface
+  domain: string;
+  topic: string;
+  difficulty: string;
 }
 
 export default function DashboardPage() {
@@ -92,7 +93,12 @@ export default function DashboardPage() {
           {quizAttempts.map((attempt, index) => (
             <Card key={index} onClick={() => handleQuizClick(attempt.quizId)} className="cursor-pointer">
               <CardHeader>
-                <CardTitle>Job Title: {quizDetails[attempt.quizId]?.title|| 'N/A'}</CardTitle>
+                <CardTitle>{quizDetails[attempt.quizId]?.title || 'N/A'}</CardTitle>
+                <CardDescription>
+                  Domain: {quizDetails[attempt.quizId]?.domain || 'N/A'} | 
+                  Topic: {quizDetails[attempt.quizId]?.topic || 'N/A'} | 
+                  Difficulty: {quizDetails[attempt.quizId]?.difficulty || 'N/A'}
+                </CardDescription>
                 <CardDescription>Score: {attempt.score.toFixed(2)}%</CardDescription>
               </CardHeader>
               <CardContent>

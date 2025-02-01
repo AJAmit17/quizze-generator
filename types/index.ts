@@ -1,15 +1,16 @@
 // types.ts
 
 export interface QuizFormData {
-  jobTitle: string;
-  skills: string;
-  jobDescription: string;
+  domain: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  topic: string;
 }
 
 export interface QuizQuestion {
   question: string;
   options: string[];
   correctAnswer: number;
+  explanation: string;
 }
 
 export interface Quiz {

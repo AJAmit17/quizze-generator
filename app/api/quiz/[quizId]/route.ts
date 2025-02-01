@@ -21,9 +21,11 @@ export async function GET(req: NextRequest, { params }: { params: { quizId: stri
       select: {
         id: true,
         title: true,
-        description: true,
+        domain: true,
+        topic: true,
+        difficulty: true,
         questions: true,
-        createdAt : true,
+        createdAt: true,
       },
     });
 

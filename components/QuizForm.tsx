@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { QuizFormData } from '@/types';
 
 interface QuizFormProps {
@@ -10,37 +16,60 @@ interface QuizFormProps {
 }
 
 export default function QuizForm({ onSubmit, isLoading }: QuizFormProps) {
-  const [jobTitle, setJobTitle] = useState('');
-  const [skills, setSkills] = useState('');
-  const [jobDescription, setJobDescription] = useState('');
+  const [domain, setDomain] = useState('');
+  const [difficulty, setDifficulty] = useState<'beginner' | 'intermediate' | 'advanced'>('beginner');
+  const [topic, setTopic] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ jobTitle, skills, jobDescription });
+    onSubmit({ domain, difficulty, topic });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <Input
-        placeholder="Job Title"
-        value={jobTitle}
-        onChange={(e) => setJobTitle(e.target.value)}
-        required
-      />
-      <Input
-        placeholder="Skills (comma-separated)"
-        value={skills}
-        onChange={(e) => setSkills(e.target.value)}
-        required
-      />
-      <Textarea
-        placeholder="Job Description"
-        value={jobDescription}
-        onChange={(e) => setJobDescription(e.target.value)}
-        required
-      />
-      <Button type="submit" disabled={isLoading}>
-        {isLoading ? 'Generating...' : 'Generate Quiz'}
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto p-4">
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Domain</label>
+        <Input
+          placeholder="Enter domain (e.g., Computer Science, Mathematics)"
+          value={domain}
+          onChange={(e) => setDomain(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Difficulty Level</label>
+        <Select
+          value={difficulty}
+          onValueChange={(value: 'beginner' | 'intermediate' | 'advanced') => setDifficulty(value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Select difficulty" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="beginner">Beginner</SelectItem>
+            <SelectItem value="intermediate">Intermediate</SelectItem>
+            <SelectItem value="advanced">Advanced</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Topic</label>
+        <Input
+          placeholder="Enter specific topic"
+          value={topic}
+          onChange={(e) => setTopic(e.target.value)}
+          required
+        />
+      </div>
+
+      <Button 
+        type="submit" 
+        disabled={isLoading}
+        className="w-full"
+      >
+        {isLoading ? 'Generating Quiz...' : 'Generate Quiz'}
       </Button>
     </form>
   );

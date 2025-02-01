@@ -17,8 +17,9 @@ export async function GET(req: NextRequest) {
       include: {
         quiz: {
           select: {
-            title: true,
-            description: true,
+            domain: true,
+            topic: true,
+            difficulty: true,
           },
         },
       },
