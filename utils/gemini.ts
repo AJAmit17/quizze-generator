@@ -1,8 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { CareerRoadmap, LearningPath } from "./types";
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
-
 export async function generateRoadmap(career: string): Promise<CareerRoadmap> {
   console.log('Generating roadmap for career:', career);
   //   console.log('API Key:', process.env.NEXT_PUBLIC_GEMINI_API_KEY);
@@ -14,7 +12,7 @@ export async function generateRoadmap(career: string): Promise<CareerRoadmap> {
 
   const genAI = new GoogleGenerativeAI("AIzaSyDyKBCF2BDeFRCshXpiJMOkh1Pc6zPL6Vc");
   console.log('API Key:', process.env.GOOGLE_API_KEY);
-  
+
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const prompt = `Generate a detailed career roadmap for ${career}. Provide a tree-like structure with multiple branching paths and options. For each step, include a title, description, and potential sub-steps or alternative paths. Format the response as a JSON object with the following structure:
