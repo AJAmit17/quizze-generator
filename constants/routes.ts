@@ -1,9 +1,6 @@
 export const routes = {
   dashboard: "/dashboard",
-  career: "/career",
-  careerRoadmap: "/career-roadmap",
-  learningPath: "/learning-path",
-  quiz: "/quiz",
+  career: "/ai-career",
   generate: "/generate",
   auth: {
     signIn: "/sign-in",

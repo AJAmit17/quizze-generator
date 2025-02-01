@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { routes } from "@/constants/routes"
 import { UserButton } from "@clerk/nextjs"
-import { HomeIcon, BookOpen, Compass, MapPin, Brain, Sparkles } from "lucide-react"
+import { HomeIcon, BookOpen, Sparkles } from "lucide-react"
 
 export function MainNav() {
   return (
@@ -18,18 +18,6 @@ export function MainNav() {
           <Link href={routes.career} className="flex items-center space-x-2">
             <BookOpen className="h-4 w-4" />
             <span>Career</span>
-          </Link>
-          <Link href={routes.careerRoadmap} className="flex items-center space-x-2">
-            <MapPin className="h-4 w-4" />
-            <span>Roadmap</span>
-          </Link>
-          <Link href={routes.learningPath} className="flex items-center space-x-2">
-            <Compass className="h-4 w-4" />
-            <span>Learning</span>
-          </Link>
-          <Link href={routes.quiz} className="flex items-center space-x-2">
-            <Brain className="h-4 w-4" />
-            <span>Quiz</span>
           </Link>
           <Link href={routes.generate} className="flex items-center space-x-2">
             <Sparkles className="h-4 w-4" />
