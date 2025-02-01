@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// components/Quiz.tsx
 
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
