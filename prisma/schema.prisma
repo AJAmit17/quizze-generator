@@ -1,0 +1,46 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Quiz {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  questions   Question[]
+  createdAt   DateTime      @default(now())
+  userId      String
+  attempts    QuizAttempt[]
+}
+
+model Question {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  quizId        String   @db.ObjectId
+  question      String
+  options       String[]
+  correctAnswer Int
+  quiz          Quiz     @relation(fields: [quizId], references: [id])
+}
+
+model QuizAttempt {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  quizId    String   @db.ObjectId
+  userId    String
+  score     Float
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  email      String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  careerPath String?
+}
