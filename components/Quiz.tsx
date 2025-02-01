@@ -68,7 +68,7 @@ export default function Quiz({ questions, quizId, onSubmit }: QuizProps) {
               ))}
             </RadioGroup>
             {showResults && (
-              <Alert className={answers[qIndex] === question.correctAnswer ? "bg-green-50" : "bg-red-50"}>
+              <Alert className={answers[qIndex] === question.correctAnswer ? "bg-green-900" : "bg-red-900"}>
                 <AlertTitle>{answers[qIndex] === question.correctAnswer ? "Correct!" : "Incorrect"}</AlertTitle>
                 <AlertDescription>
                   {answers[qIndex] === question.correctAnswer
